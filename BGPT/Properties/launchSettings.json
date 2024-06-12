@@ -1,0 +1,44 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:36979",
+      "sslPort": 44335
+    }
+  },
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5188",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_OPENAI_API_KEY": "b24f55f549d541bb829ffb8e5fa7e67c",
+        "AZURE_OPENAI_ENDPOINT": "https://malik-azure-openai-trial-1.openai.azure.com/"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7181;http://localhost:5188",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_OPENAI_API_KEY": "b24f55f549d541bb829ffb8e5fa7e67c",
+        "AZURE_OPENAI_ENDPOINT": "https://malik-azure-openai-trial-1.openai.azure.com/"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_OPENAI_API_KEY": "b24f55f549d541bb829ffb8e5fa7e67c",
+        "AZURE_OPENAI_ENDPOINT": "https://malik-azure-openai-trial-1.openai.azure.com/"
+      }
+    }
+  }
+}

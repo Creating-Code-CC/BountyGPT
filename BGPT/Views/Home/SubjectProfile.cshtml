@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="d-flex flex-column align-items-center text-center">
+    <img src="~/images/TBundy.jpg" alt="Profile Image" class="img-fluid mx-auto d-block mb-3">
+    <div class="text-start" style="width: auto; max-width: 100%;">
+        <!-- Adjust width here -->
+        <h5>Subject ID: TB-11241946</h5>
+        <p>Subject Name: Theodore Robert Bundy</p>
+        <p>Subject Alias: Ted</p>
+        <p>Age: 42</p>
+        <p>Danger Level: Medium</p>
+        <p>Last Known Location: West Valley City, Utah</p>
+        <p>Wanted For: Suspected Homicide</p>
+        <p>Date of Last Sighting: November 11th 1977</p>
+        <p>Reward: $25,000</p>
+    </div>
+</div>
+
+@if (ViewBag.Response != null && ViewBag.Query != null)
+{
+    <div class="alert alert-info mt-3" role="alert">
+        <strong>User:</strong> @ViewBag.Query<br />
+        <strong>Assistant:</strong> @ViewBag.Response
+    </div>
+}

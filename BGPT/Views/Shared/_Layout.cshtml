@@ -1,0 +1,213 @@
+﻿@{
+    var extractedText = ViewData["ExtractedText"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BGPT.styles.css" asp-append-version="true" />
+    <style>
+        .chat-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer {
+            background-color: #f8f9fa; /* Light grey background */
+            padding: 10px 0; /* Padding for spacing */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+        }
+
+        .container {
+            max-width: 600px; /* Adjust this width as necessary */
+            margin: auto; /* Center the container */
+        }
+
+        .input-group {
+            width: 100%; /* Full width */
+        }
+
+            .input-group input {
+                flex-grow: 1; /* Input field takes up the extra space */
+                margin-right: 5px; /* Space between input field and button */
+            }
+
+            .input-group button {
+                white-space: nowrap; /* Prevents text wrapping in button */
+            }
+
+    </style>
+
+</head>
+<body>
+    <header class="fixed-top d-flex justify-content-between align-items-center px-3">
+        <!-- #region LeftOffCanvasSection -->
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#exampleOffcanvas">
+            <i class="bi bi-list"></i> Toggle Offcanvas
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="exampleOffcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLabel">Navigation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <img src="~/images/TBundy.jpg" alt="Profile Image" class="img-fluid mb-3">
+                <div style="text-align: center;">
+                    <h5>Theodore Robert Bundy</h5>
+                    <p>Subject ID: TB-11241946</p>
+                    <p>Alias: Ted</p>
+                    <p>Last Known Location: West Valley City, Utah</p>
+                    <p>Reward: $25,000</p>
+                </div>
+                <div class="list-group">
+                    <a href="@Url.Action("SubjectProfile", "Home")" class="list-group-item list-group-item-action">Subject Profile</a>
+                    <a href="@Url.Action("PhysicalDescriptions", "Home")" class="list-group-item list-group-item-action">Physical Descriptions</a>
+                    <a href="@Url.Action("LegalInformation", "Home")" class="list-group-item list-group-item-action">Legal Information</a>
+                    <a href="@Url.Action("RecentActivity", "Home")" class="list-group-item list-group-item-action">Recent Activity</a>
+                    <a href="@Url.Action("RiskAssessment", "Home")" class="list-group-item list-group-item-action">Risk Assessment</a>
+                    <a href="@Url.Action("BackgroundInfoSkills", "Home")" class="list-group-item list-group-item-action">Background Info and Skills</a>
+                    <a href="@Url.Action("Contacts", "Home")" class="list-group-item list-group-item-action">Contacts</a>
+                    <a href="@Url.Action("Addresses", "Home")" class="list-group-item list-group-item-action">Addresses</a>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
+        <!-- #region UploadDocumentsButton -->
+        <form method="post" enctype="multipart/form-data" action="/Home/IntelligenceGathering">
+            <!-- Stylish file input button with Bootstrap icon -->
+            <label class="btn">
+                <i class="bi bi-upload" style="font-size: 34px;"></i>
+                <input type="file" name="file" style="display: none;" onchange="this.form.submit();">
+            </label>
+            <button type="submit" style="display: none;">Upload</button>
+        </form>
+    </header>
+        <!-- #endregion -->
+
+    <!-- Padding or margin might be required for the content below the header to ensure it's not overlapped by the fixed header -->
+    <style>
+        body {
+            padding-top: 60px; /* Adjust the value based on your header's height */
+        }
+    </style>
+    <!-- #region RenderMainBody -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region FixedBottomChatBox -->
+    <footer class="fixed-bottom bg-light">
+        <div class="container text-center">
+            <div class="chat-box">
+@*                 @if (TempData["MyValue"] != null)
+ *@@* //{ *@
+            <form method="post" action="/Home/Query">
+                    <input type="hidden" name="myValue" value="@TempData["MyValue"]" />
+                <input type="text" class="form-control" id="chatInput" name="chatInput" placeholder="Type your message..." required>
+                <button type="submit" class="btn btn-primary" id="sendButton" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Send</button>
+            </form>
+@* //} *@
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- #endregion -->
+     
+    <!-- #region RightSideOffCanvasLayout -->
+@*     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Chat with Us</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Chat messages display area -->
+            <div id="chatMessages" style="height: 300px; overflow-y: auto; margin-bottom: 10px;">
+                <!-- Messages will be appended here -->
+            </div>
+            <!-- Chat input area -->
+            <div class="input-group">
+                <input type="text" class="form-control" id="chatMessageInput" placeholder="Type your message..." aria-label="Recipient's username">
+                <button class="btn btn-primary" type="button" id="sendChatMessage">Send</button>
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+
+
+    <script>
+        document.getElementById('sendChatMessage').addEventListener('click', function () {
+            var input = document.getElementById('chatMessageInput');
+            var message = input.value;
+            if (message.trim() === '') {
+                alert('Please type a message!');
+            } else {
+                var messagesContainer = document.getElementById('chatMessages');
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message';
+                messagesContainer.appendChild(newMessage);
+                // Scroll to the latest message
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                // Clear the input after sending
+                input.value = '';
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if there's a saved message in sessionStorage and display it
+            var lastMessage = sessionStorage.getItem('lastMessage');
+            if (lastMessage) {
+                var messagesContainer = document.getElementById('chatMessages');
+                var savedMessage = document.createElement('div');
+                savedMessage.textContent = lastMessage;
+                savedMessage.className = 'chat-message';
+                messagesContainer.appendChild(savedMessage);
+            }
+        });
+
+        document.getElementById('sendButton').addEventListener('click', function () {
+            var input = document.getElementById('chatInput');
+            var message = input.value;
+            if (message.trim() === '') {
+                alert('Please type a message!');
+            } else {
+                var messagesContainer = document.getElementById('chatMessages');
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message';
+                messagesContainer.appendChild(newMessage);
+
+                // Scroll to the latest message
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                // Save the message to sessionStorage
+                sessionStorage.setItem('lastMessage', message);
+
+                // Clear the input after sending
+                input.value = '';
+            }
+        });
+    </script> *@
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
