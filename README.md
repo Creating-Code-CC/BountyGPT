@@ -50,6 +50,9 @@ BountyGPT is a powerful application designed to streamline the process of appreh
 1. **Upload Documents**: Navigate to the document upload section and upload relevant documents related to your bounty subjects.
 2. **Interact with Documents**: Use the chat interface to ask questions and retrieve information from the uploaded documents.
 3. **View Subject Portfolio**: Access the automatically generated portfolio to get a comprehensive view of your bounty subject.
+![Screenshot 1](images/Screenshot1.png)
+![Screenshot 2](images/Screenshot2.png)
+![Screenshot 3](images/Screenshot3.png)
 
 ## Contributing
 
