@@ -1,1 +1,3 @@
 API Key and blob storage connection strings Keeps gettings leaked even after storing including it in my .gitignore file
+
+need to fix appsettings and app development to previous and double check launch settings
