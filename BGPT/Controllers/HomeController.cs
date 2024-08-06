@@ -18,7 +18,7 @@ namespace BGPT.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly string connectionString = "DefaultEndpointsProtocol=https;AccountName=malikblobstoragetrial1;AccountKey=/FAQyF279IdE9ppQJ3uQ9T3cLr+mGIG9wc/Pq7shi4pUrWvAHo3Xw5mc9jW+NXPdTHhqCVIlGnuV+AStSjF8BA==;EndpointSuffix=core.windows.net"; // Store this securely!
+        private readonly string connectionString = "blob storage"; // Store this securely!
         public string extractedText;
         public Uri endpoint;
         public AzureKeyCredential credentials;
