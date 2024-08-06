@@ -1,1 +1,1 @@
-API Key Keeps gettings leaked even after storing including it in my .gitignore file
+API Key and blob storage connection strings Keeps gettings leaked even after storing including it in my .gitignore file
